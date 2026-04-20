@@ -31,29 +31,51 @@ async function parseApiResponse(response) {
   return data;
 }
 
-async function apiGet(action, params = {}) {
+async function apiGet(action, params = {}, retries = 2) {
   const url = buildApiUrl(action, params);
+  let lastError;
 
-  const response = await fetch(url, {
-    method: 'GET',
-    cache: 'no-store'
-  });
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        cache: 'no-store'
+      });
+      return await parseApiResponse(response);
+    } catch (error) {
+      lastError = error;
+      if (attempt < retries) {
+        await new Promise(resolve => setTimeout(resolve, 1000 * (attempt + 1)));
+      }
+    }
+  }
 
-  return await parseApiResponse(response);
+  throw lastError;
 }
 
-async function apiPost(action, payload = {}) {
+async function apiPost(action, payload = {}, retries = 2) {
   const url = buildApiUrl(action);
+  let lastError;
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'text/plain;charset=utf-8'
-    },
-    body: JSON.stringify(payload)
-  });
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      });
+      return await parseApiResponse(response);
+    } catch (error) {
+      lastError = error;
+      if (attempt < retries) {
+        await new Promise(resolve => setTimeout(resolve, 1000 * (attempt + 1)));
+      }
+    }
+  }
 
-  return await parseApiResponse(response);
+  throw lastError;
 }
 
 window.buildApiUrl = buildApiUrl;
