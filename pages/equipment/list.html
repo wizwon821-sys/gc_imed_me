@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>장비 목록</title>
+  <link rel="stylesheet" href="../../assets/css/common.css" />
+  <link rel="stylesheet" href="../../assets/css/pages/equipment-list.css" />
+</head>
+<body class="portal-page equipment-list-page">
+  <div class="container page-shell">
+    <section class="top-brand-bar portal-topbar portal-hero-card equipment-list-topbar">
+      <div class="top-brand-left">
+        <div class="top-brand-logo">+</div>
+        <div class="top-brand-texts">
+          <strong class="top-brand-title">의료장비 관리시스템</strong>
+          <span class="top-brand-sub">장비 검색 · 상태 조회 · 상세 확인</span>
+        </div>
+      </div>
+
+      <div class="top-brand-actions equipment-list-top-actions">
+        <a class="portal-header-btn portal-header-btn--secondary" href="../../portal.html">HOME</a>
+        <a class="portal-header-btn portal-header-btn--secondary" href="dashboard.html">대시보드</a>
+        <a class="portal-header-btn portal-header-btn--primary" id="createEquipmentBtn" href="form.html">장비등록</a>
+      </div>
+    </section>
+
+    <section class="page-hero-simple">
+      <div>
+        <h1 class="page-title">장비 목록</h1>
+        <p class="page-desc">
+          검색 조건 없이 진입하면 최근 등록 장비를 먼저 보여주고, 검색 조건을 입력하면 전체 검색으로 전환됩니다.
+        </p>
+      </div>
+    </section>
+
+    <div id="messageBox" class="message-box"></div>
+
+    <section class="card filter-card">
+      <div class="section-head">
+        <h2 class="section-title">장비 검색</h2>
+        <div class="sub-text" id="listSearchHelp">
+          장비번호, 장비명, 모델명, 부서, 상태, 제조사 기준으로 조회할 수 있습니다.
+        </div>
+      </div>
+
+      <form id="searchForm">
+        <div class="form-grid two-col">
+          <label class="form-field full-col">
+            <span class="form-label">검색어</span>
+            <input
+              type="text"
+              id="keyword"
+              class="input"
+              placeholder="장비번호, 장비명, 모델명, 시리얼, 부서 등"
+            />
+          </label>
+
+          <label class="form-field">
+            <span class="form-label">의원</span>
+            <select id="clinic_code" class="input"></select>
+          </label>
+
+          <label class="form-field">
+            <span class="form-label">팀</span>
+            <select id="team_code" class="input"></select>
+          </label>
+
+          <label class="form-field">
+            <span class="form-label">상태</span>
+            <select id="status" class="input"></select>
+          </label>
+
+          <label class="form-field">
+            <span class="form-label">제조사</span>
+            <input
+              type="text"
+              id="manufacturer"
+              class="input"
+              placeholder="제조사명 입력"
+            />
+          </label>
+        </div>
+
+        <div class="filter-actions">
+          <div class="filter-actions-left">
+            <div class="inline-field">
+              <label for="page_size" class="form-label">페이지당 표시</label>
+              <select id="page_size" class="input input-sm"></select>
+            </div>
+          </div>
+
+          <div class="filter-actions-right">
+            <button type="submit" class="btn-primary">조회</button>
+            <button type="button" class="btn-secondary" id="resetFilterBtn">초기화</button>
+            <button type="button" class="btn-secondary" id="exportExcelBtn">엑셀 다운로드</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="equipment-list-wrap">
+      <div class="equipment-list-toolbar">
+        <div class="equipment-list-summary" id="listSummary">최근 등록 장비를 불러오는 중...</div>
+      </div>
+
+      <div id="equipmentList" class="equipment-list-grid">
+        <div class="empty-box">불러오는 중...</div>
+      </div>
+
+      <div id="paginationArea" class="pagination-area"></div>
+    </section>
+  </div>
+
+  <script src="../../assets/js/core/config.js"></script>
+  <script src="../../assets/js/core/api.js"></script>
+  <script src="../../assets/js/core/utils.js"></script>
+  <script src="../../assets/js/core/auth.js"></script>
+  <script src="../../assets/js/core/app-permission.js"></script>
+  <script src="../../assets/js/core/org-select.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="../../assets/js/equipment/equipment-list.js"></script>
+
+  <div id="globalLoading" aria-hidden="true">
+    <div class="global-loading__dialog">
+      <div class="global-loading__spinner" aria-hidden="true"></div>
+      <div class="global-loading__text" id="globalLoadingText">불러오는 중...</div>
+    </div>
+  </div>
+</body>
+</html>

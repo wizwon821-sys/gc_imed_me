@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>장비 등록/수정</title>
+  <link rel="stylesheet" href="../../assets/css/common.css" />
+  <link rel="stylesheet" href="../../assets/css/pages/equipment-form.css" />
+</head>
+<body class="portal-page equipment-form-page">
+  <div class="container page-shell equipment-form-shell">
+    <section class="top-brand-bar portal-topbar portal-hero-card equipment-form-topbar">
+      <div class="top-brand-left">
+        <div class="top-brand-logo">+</div>
+        <div class="top-brand-texts">
+          <strong class="top-brand-title">의료장비 관리시스템</strong>
+          <span class="top-brand-sub">장비 등록 · 수정</span>
+        </div>
+      </div>
+
+      <div class="top-brand-actions portal-top-actions equipment-form-top-actions">
+        <a class="portal-header-btn portal-header-btn--secondary" href="../../portal.html">HOME</a>
+        <a class="portal-header-btn portal-header-btn--secondary" href="dashboard.html">대시보드</a>
+        <a class="portal-header-btn portal-header-btn--secondary" href="list.html">장비목록</a>
+      </div>
+    </section>
+
+    <section class="page-hero-simple equipment-form-hero">
+      <div class="equipment-form-hero-copy">
+        <span class="portal-section-kicker">EQUIPMENT FORM</span>
+        <h1 class="page-title" id="pageTitle">장비 등록</h1>
+        <p class="page-desc" id="pageDesc">신규 의료장비 정보를 등록합니다.</p>
+      </div>
+    </section>
+
+    <div id="messageBox" class="message-box"></div>
+
+    <form id="equipmentForm" class="card form-card equipment-form-card">
+      <div class="section-head equipment-form-section-head">
+        <div>
+          <span class="portal-section-kicker">BASIC INFO</span>
+          <h2 class="section-title">기본 정보</h2>
+          <div class="sub-text equipment-form-section-desc">
+            장비 식별, 소속, 구매 및 관리 정보를 입력합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-grid two-col">
+        <label class="form-field">
+          <span class="form-label required">장비명</span>
+          <input type="text" id="equipment_name" class="input" placeholder="예: 초음파 진단기" required />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label required">모델명</span>
+          <input type="text" id="model_name" class="input" placeholder="모델명을 입력하세요" required />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label required">의원</span>
+          <select id="clinic_code" class="input" required></select>
+        </label>
+
+        <label class="form-field">
+          <span class="form-label required">팀</span>
+          <select id="team_code" class="input" required></select>
+        </label>
+
+        <label class="form-field full-col is-hidden-field">
+          <span class="form-label">부서명</span>
+          <input
+            type="text"
+            id="department_preview"
+            class="input"
+            readonly
+            placeholder="의원 / 팀 선택 시 자동 표시"
+          />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">제조사</span>
+          <input type="text" id="manufacturer" class="input" placeholder="제조사를 입력하세요" />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label required">시리얼번호</span>
+          <input type="text" id="serial_no" class="input" placeholder="시리얼번호를 입력하세요" required />
+        </label>
+        
+        <label class="form-field">
+          <span class="form-label">제조일자</span>
+          <input type="date" id="manufacture_date" class="input" />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">취득일자</span>
+          <input type="date" id="purchase_date" class="input" />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">구매처</span>
+          <input type="text" id="vendor" class="input" placeholder="구매처를 입력하세요" />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">취득가액</span>
+          <input type="text" inputmode="numeric" id="acquisition_cost" class="input" placeholder="숫자만 입력" />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">담당자</span>
+          <input type="text" id="manager_name" class="input" placeholder="담당자명을 입력하세요" />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">담당자 연락처</span>
+          <input type="text" id="manager_phone" class="input" placeholder="연락처를 입력하세요" />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">유지보수 종료일</span>
+          <input type="date" id="maintenance_end_date" class="input" />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">상태</span>
+          <select id="status" class="input"></select>
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">위치</span>
+          <input type="text" id="location" class="input" placeholder="예: 3층 진료실" />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">현재 사용자</span>
+          <input type="text" id="current_user" class="input" placeholder="현재 사용자를 입력하세요" />
+        </label>
+
+        <label class="form-field full-col">
+          <span class="form-label">메모</span>
+          <textarea id="memo" class="textarea" rows="5" placeholder="추가로 관리해야 할 사항을 입력하세요"></textarea>
+        </label>
+
+        <div class="form-field full-col">
+          <span class="form-label">장비 사진</span>
+
+          <div class="photo-upload-box">
+            <div class="form-photo-preview" id="photoPreviewWrap">
+              <img id="photoPreviewImage" class="photo-preview-image is-hidden" alt="장비 사진 미리보기" />
+              <div id="photoPreviewEmpty" class="photo-preview-empty">
+                등록된 사진이 없습니다.
+              </div>
+            </div>
+            
+            <div class="form-photo-meta" id="photoExistingMeta" style="display:none;">
+              현재 등록된 사진이 있습니다.
+            </div>
+
+            <div class="photo-upload-actions">
+              <div class="photo-file-control">
+                <input type="file" id="photoInput" class="photo-file-input" accept="image/*" />
+                <label for="photoInput" class="photo-file-trigger">사진 선택</label>
+                <div id="photoFileName" class="photo-file-name">선택된 파일 없음</div>
+              </div>
+              
+              <div class="photo-upload-help">
+                업로드 전에 자동 압축됩니다. 장비 식별이 가능한 정도의 사진만 올려주세요.
+              </div>
+              <div class="photo-upload-button-row">
+                <button type="button" class="btn" id="removePhotoBtn">사진 제거</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="form-actions">
+        <a href="list.html" class="btn">목록으로</a>
+        <button type="submit" id="submitButton" class="btn btn-primary">
+          <span id="submitButtonText">장비 등록</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script src="../../assets/js/core/config.js"></script>
+  <script src="../../assets/js/core/api.js"></script>
+  <script src="../../assets/js/core/utils.js"></script>
+  <script src="../../assets/js/core/auth.js"></script>
+  <script src="../../assets/js/core/org-select.js"></script>
+  <script src="../../assets/js/equipment/equipment-form.js"></script>
+
+  <div id="globalLoading" aria-hidden="true">
+    <div class="global-loading__dialog">
+      <div class="global-loading__spinner" aria-hidden="true"></div>
+      <div class="global-loading__text" id="globalLoadingText">불러오는 중...</div>
+    </div>
+  </div>
+</body>
+</html>

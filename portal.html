@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSO관리팀 업무포털</title>
+  <link rel="stylesheet" href="./assets/css/common.css" />
+  <link rel="stylesheet" href="./assets/css/pages/portal.css" />
+</head>
+<body>
+  <div class="container page-shell portal-page portal-page-compact">
+    <section class="top-brand-bar portal-topbar portal-hero-card">
+      <div class="top-brand-left">
+        <div class="top-brand-logo">+</div>
+        <div class="top-brand-texts">
+          <strong class="top-brand-title">MSO관리팀 업무포털</strong>
+        </div>
+      </div>
+
+      <div class="top-brand-actions portal-top-actions portal-top-actions-compact">
+        <div class="portal-header-userline">
+          <span class="portal-header-userlabel">사용자</span>
+          <strong class="portal-header-username" id="portalUserName">사용자</strong>
+          <span class="portal-header-usersep">·</span>
+          <span class="portal-header-usersub" id="portalUserSub">소속 없음 / user</span>
+        </div>
+
+        <button
+          type="button"
+          id="adminPageBtn"
+          class="portal-header-btn portal-header-btn--primary"
+          style="display:none;"
+        >
+          관리자 페이지
+        </button>
+
+        <button
+          type="button"
+          id="logoutBtn"
+          class="portal-header-btn portal-header-btn--secondary"
+        >
+          로그아웃
+        </button>
+      </div>
+    </section>
+
+    <section class="portal-section portal-apps-section portal-apps-section-compact">
+      <div class="portal-section-head portal-section-head--compact">
+        <div>
+          <h2 class="section-title portal-section-title">사용 가능한 앱</h2>
+        </div>
+      </div>
+
+      <div id="portalAppGrid" class="portal-app-grid"></div>
+
+      <div id="portalEmpty" class="empty-box" style="display:none;">
+        사용 가능한 앱이 없습니다.
+      </div>
+    </section>
+  </div>
+
+  <script src="./assets/js/core/config.js"></script>
+  <script src="./assets/js/core/api.js"></script>
+  <script src="./assets/js/core/utils.js"></script>
+  <script src="./assets/js/core/auth.js"></script>
+  <script src="./assets/js/core/app-permission.js"></script>
+  <script src="./assets/js/portal/portal.js"></script>
+
+  <div id="globalLoading" aria-hidden="true">
+    <div class="global-loading__dialog">
+      <div class="global-loading__spinner" aria-hidden="true"></div>
+      <div class="global-loading__text" id="globalLoadingText">불러오는 중...</div>
+    </div>
+  </div>
+</body>
+</html>
